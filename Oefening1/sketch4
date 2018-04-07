@@ -1,0 +1,19 @@
+var nums = [20, 46, 15, 70];
+var index =0;
+
+function setup(){
+  createCanvas(600,600);
+
+}
+
+function draw(){
+
+  background(0);
+  stroke(255);
+  fill(55);
+  for (var i=0; i < 4; i ++ ){
+  ellipse(100+100*i,300,nums[i]);
+  }
+
+
+}

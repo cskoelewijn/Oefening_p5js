@@ -1,0 +1,80 @@
+let bubbles = [];
+
+
+
+function setup(){
+  createCanvas(600,400);
+
+  for (let i = 0; i < 5; i ++) {
+    let x = random(width);
+    let y = random(height);
+    let r = random(20,50);
+    let b = new bubble(x,y,r);
+    bubbles.push(b);
+  }
+}
+
+// function mouseMoved() {
+//   for (let i = 0; i < bubbles.length; i++) {
+//     bubbles[i].contains(mouseX,mouseY);
+//   }
+// }
+
+function mousePressed(){
+  for (let i = bubbles.length-1; i >= 0; i--) {
+    if (bubbles[i].contains(mouseX,mouseY)){
+      bubbles.splice(i,1);
+    } // end if
+  } // end for
+} // end function
+
+
+function draw() {
+  background(0);
+
+  for (let element of bubbles) {
+    if (element.contains(mouseX,mouseY)){
+      element.changeColor(255);
+    } else {
+      element.changeColor(0);
+    }// end if
+    element.move();
+    element.show();
+  } // end for
+} // end draw
+
+
+
+class bubble {
+    constructor(x,y,r) {
+      this.x = x;
+      this.y = y;
+      this.r = r;
+      this.brightness = 0;
+    }
+
+    changeColor(bright){
+      this.brightness = bright;
+    }
+
+    contains(x,y){
+      let d = dist(x,y,this.x,this.y);
+      return (d < this.r);   //  is true of false
+    }
+
+    move(){
+      this.x = this.x + random(-5,5);
+      this.y = this.y + random(-5,5);
+      if (this.x > width-this.r) { this.x = this.x - 5};
+      if (this.x < 0+this.r) { this.x = this.x + 5};
+      if (this.y > height-this.r) { this.y = this.y - 5};
+      if (this.y < 0+this.r) { this.y = this.y + 5};
+    }
+
+    show(){
+      stroke(255);
+      strokeWeight(4);
+      fill(this.brightness, 100);
+      ellipse(this.x, this.y, this.r*2);
+    }
+}

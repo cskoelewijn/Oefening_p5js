@@ -1,0 +1,42 @@
+var ball = {
+  x: 300,
+  y: 200,
+  vx: 4,
+  vy: -3
+}
+
+function setup(){
+createCanvas(600, 400);
+  var angle = degrees(PI/2);
+  print(angle);
+
+}
+
+function draw() {
+  background(0);
+  move();
+  bounce();
+  display();
+
+
+
+}
+
+function move(){
+  ball.x = ball.x + ball.vx;
+  ball.y = ball.y + ball.vy;
+}
+function bounce(){
+  if (ball.x > width || ball.x <0) {
+    ball.vx = ball.vx *-1;
+  }
+  if (ball.y > height || ball.y <0) {
+    ball.vy = ball.vy *-1;
+  }
+}
+function display() {
+  stroke(255);
+  strokeWeight(4);
+  noFill();
+  ellipse(ball.x, ball.y, 24, 24);
+}
